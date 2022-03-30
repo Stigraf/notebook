@@ -1,6 +1,26 @@
-document.getElementById("saveBut").addEventListener("click", save);
-function save() {
+document.querySelector('#saveBut').addEventListener('click', () => {
+    
+        document.querySelector('#tasks').innerHTML += `
+            <div class="task">
 
-				document.getElementById('savedText').innerHTML += `<li>${document.getElementById('inputText').value}</li>`;
-				document.getElementById('inputText').value = " ";
-			}
+            	
+                <span id="taskname">
+                    ${document.querySelector('#newtask input').value}
+                </span>
+                <button class="delete">delete
+                    <i class="far fa-trash-alt"></i>
+                </button>
+            </div>
+        `;
+        
+        let current_tasks = document.querySelectorAll(".delete");
+        for(let i=0; i<current_tasks.length; i++){
+            current_tasks[i].onclick = function(){
+                this.parentNode.remove();
+            }
+        }
+
+        
+         	
+    
+})
