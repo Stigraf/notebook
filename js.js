@@ -3,13 +3,13 @@
 	let counter = 0
 	updateUI()
 	document.getElementById('saveBut').disabled = true
-	document.querySelector('#newtask input').addEventListener('change', () => {
+	 function isInputEmpty() {
 		if (document.querySelector('#newtask input').value == '') {
 		document.getElementById('saveBut').disabled = true 
 	} else {
 		document.getElementById('saveBut').disabled = false
 	}
-	})
+	}
 	
 
 document.querySelector('#saveBut').addEventListener('click', () => {
@@ -56,6 +56,7 @@ function generateTasks() {
                 </button>
 			`;
 			isThrough(task.id)
+			document.getElementById('saveBut').disabled = true 
 			
 
        			
