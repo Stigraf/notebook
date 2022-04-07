@@ -3,13 +3,13 @@
 	let counter = 0
 	updateUI()
 	document.getElementById('saveBut').disabled = true
-	 function isInputEmpty() {
+	document.querySelector('#newtask input').addEventListener('input', () => {
 		if (document.querySelector('#newtask input').value == '') {
 		document.getElementById('saveBut').disabled = true 
 	} else {
 		document.getElementById('saveBut').disabled = false
 	}
-	}
+	})
 	
 
 document.querySelector('#saveBut').addEventListener('click', () => {
