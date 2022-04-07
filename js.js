@@ -2,15 +2,29 @@
 	let taskList = []
 	let counter = 0
 	updateUI()
+	document.getElementById('saveBut').disabled = true
+	document.querySelector('#newtask input').addEventListener('change', () => {
+		if (document.querySelector('#newtask input').value == '') {
+		document.getElementById('saveBut').disabled = true 
+	} else {
+		document.getElementById('saveBut').disabled = false
+	}
+	})
+	
 
 document.querySelector('#saveBut').addEventListener('click', () => {
    saveButPressed()
 })
 
 document.querySelector('#newtask input').addEventListener('keypress', e => {
-	if (e.key === 'Enter'){
+	if (document.querySelector('#newtask input').value == '') {
+		
+	} else {
+		if (e.key === 'Enter'){
 		saveButPressed()
 	}
+	}
+	
 })
 
 function cleanInput() {
@@ -112,17 +126,14 @@ function updateUI() {
 
 function saveButPressed() {
 	    let text = document.querySelector('#newtask input').value
-    if (text == "") {
-    	alert('input is empty')
-    }
-    else {
+  
     let task = { title: text, isChecked: false, id: counter }
     taskList.push(task)
     counter += 1
 
 updateUI()
 cleanInput()  	
- }
+ 
 
 }
 
