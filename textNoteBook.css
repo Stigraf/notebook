@@ -1,7 +1,18 @@
 
 .through{
 	text-decoration: line-through;
+	opacity: 50%;
 }
-/*input[type="checkbox"]:checked {
+/*input[type="checkbox"]:checked + span{
   text-decoration: line-through;
-}*/
+  opacity: 50%;
+}
+*/
+.container {
+	display: flex;
+	justify-content: center;
+}
+h1 {
+	text-align: center;
+}
+
