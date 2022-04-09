@@ -9,7 +9,17 @@ saveButton.disabled = true
 inputTask.addEventListener('input', (event) => {
     saveButton.disabled = event.target.value === '';
     document.getElementById('errorAlert').innerHTML = ``
+    if (taskList.some(e => e.title === inputTask.value.trim())) {
+        document.getElementById('errorAlert').innerHTML = inputTask.value + ` task already exist`
+        let itemId = taskList.findIndex(e => e.title === inputTask.value.trim())
+        let textId = taskList[itemId].id
 
+        setTimeout(() => document.getElementById(`taskname_${textId}`).classList.add('red'), 1);
+        setTimeout(() => document.getElementById(`taskname_${textId}`).classList.remove('red'), 3000);
+
+        saveButton.disabled = true
+
+    }
 })
 
 
@@ -18,13 +28,12 @@ saveButton.addEventListener('click', () => {
 })
 
 inputTask.addEventListener('keypress', e => {
-    if (inputTask.value === '') {
+        if (e.key === 'Enter' && saveButton.disabled === false) {
 
-    } else {
-        if (e.key === 'Enter') {
-            saveButPressed()
+                saveButPressed()
+
         }
-    }
+
 
 })
 
@@ -81,7 +90,6 @@ function generateTasks() {
     })
 
 }
-
 function getCheckBoxIdByItemId(itemId) {
     return `checkBox_${itemId}`
 }
@@ -128,19 +136,7 @@ function updateUI() {
 }
 
 function saveButPressed() {
-    if (taskList.some(e => e.title === inputTask.value.trim())) {
-        document.getElementById('errorAlert').innerHTML = inputTask.value + ` task already exist`
-        let itemId = taskList.findIndex(e => e.title === inputTask.value.trim())
-        let textId = taskList[itemId].id
 
-        setTimeout(() => document.getElementById(`taskname_${textId}`).classList.add('red'), 1);
-        setTimeout(() => document.getElementById(`taskname_${textId}`).classList.remove('red'), 3000);
-
-
-        cleanInput()
-
-
-    } else {
 
         let text = inputTask.value.trim()
 
@@ -150,7 +146,7 @@ function saveButPressed() {
 
         updateUI()
         cleanInput()
-    }
+
 
 }
 
