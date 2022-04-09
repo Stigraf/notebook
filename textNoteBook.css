@@ -16,3 +16,11 @@ h1 {
 	text-align: center;
 }
 
+.red {
+	color: red;
+	text-size: 10px;
+	transition-duration: 0.2s;
+}
+span {
+	transition-duration: 0.5s;
+}
