@@ -8,18 +8,16 @@ updateUI()
 saveButton.disabled = true
 inputTask.addEventListener('input', (event) => {
     saveButton.disabled = event.target.value === '';
-    document.getElementById('errorAlert').innerHTML = ``
+    document.getElementById('errorAlert').innerHTML = `<br>`
     if (taskList.some(e => e.title === inputTask.value.trim())) {
         document.getElementById('errorAlert').innerHTML = inputTask.value + ` task already exist`
         let itemId = taskList.findIndex(e => e.title === inputTask.value.trim())
         let textId = taskList[itemId].id
-
-        setTimeout(() => document.getElementById(`taskname_${textId}`).classList.add('red'), 1);
-        setTimeout(() => document.getElementById(`taskname_${textId}`).classList.remove('red'), 3000);
-
+        document.getElementById(`taskname_${textId}`).classList.add('red')
+        setTimeout(() => document.getElementById(`taskname_${textId}`).classList.remove('red'), 1000)
         saveButton.disabled = true
-
     }
+
 })
 
 
@@ -28,11 +26,11 @@ saveButton.addEventListener('click', () => {
 })
 
 inputTask.addEventListener('keypress', e => {
-        if (e.key === 'Enter' && saveButton.disabled === false) {
+    if (e.key === 'Enter' && saveButton.disabled === false) {
 
-                saveButPressed()
+        saveButPressed()
 
-        }
+    }
 
 
 })
@@ -57,9 +55,10 @@ function generateTasks() {
                 <span id="${taskNameId}">
                    ${task.title} 
                 </span>
-                <button id=${deleteId}>delete
+                <button class="delBut" id=${deleteId}>delete
                     <i class="far fa-trash-alt"></i>
                 </button>
+                <hr>
 			`;
         isThrough(task.id)
         saveButton.disabled = true
@@ -90,6 +89,7 @@ function generateTasks() {
     })
 
 }
+
 function getCheckBoxIdByItemId(itemId) {
     return `checkBox_${itemId}`
 }
@@ -127,7 +127,7 @@ function removeTask(id) {
 }
 
 function updateUI() {
-    taskList.sort(function(a, b) {
+    taskList.sort(function (a, b) {
         return (a.isChecked - b.isChecked);
     })
     cleanUI()
@@ -138,14 +138,14 @@ function updateUI() {
 function saveButPressed() {
 
 
-        let text = inputTask.value.trim()
+    let text = inputTask.value.trim()
 
-        let task = {title: text, isChecked: false, id: counter}
-        taskList.push(task)
-        counter += 1
+    let task = {title: text, isChecked: false, id: counter}
+    taskList.push(task)
+    counter += 1
 
-        updateUI()
-        cleanInput()
+    updateUI()
+    cleanInput()
 
 
 }
