@@ -3,6 +3,7 @@ let counter = 0
 const saveButton = document.getElementById('saveBut')
 const inputTask = document.querySelector('#newtask input')
 
+
 updateUI()
 saveButton.disabled = true
 inputTask.addEventListener('input', (event) => {
@@ -64,6 +65,7 @@ function generateTasks() {
         document.getElementById(checkBoxId).addEventListener('change', () => {
                 isCheckedChecked(task.id)
                 isThrough(task.id)
+                updateUI()
 
 
             }
@@ -117,15 +119,18 @@ function removeTask(id) {
 }
 
 function updateUI() {
+    taskList.sort(function(a, b) {
+        return (a.isChecked - b.isChecked);
+    })
     cleanUI()
     generateTasks()
 
 }
 
 function saveButPressed() {
-    if (taskList.some(e => e.title === inputTask.value)) {
+    if (taskList.some(e => e.title === inputTask.value.trim())) {
         document.getElementById('errorAlert').innerHTML = inputTask.value + ` task already exist`
-        let itemId = taskList.findIndex(e => e.title === inputTask.value)
+        let itemId = taskList.findIndex(e => e.title === inputTask.value.trim())
         let textId = taskList[itemId].id
 
         setTimeout(() => document.getElementById(`taskname_${textId}`).classList.add('red'), 1);
@@ -137,7 +142,7 @@ function saveButPressed() {
 
     } else {
 
-        let text = inputTask.value
+        let text = inputTask.value.trim()
 
         let task = {title: text, isChecked: false, id: counter}
         taskList.push(task)
